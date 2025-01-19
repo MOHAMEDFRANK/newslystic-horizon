@@ -22,12 +22,14 @@ const Index = () => {
       searchQuery
         ? searchNews(searchQuery)
         : fetchTopHeadlines(selectedCategory),
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to fetch news articles. Please try again later.",
-        variant: "destructive",
-      });
+    meta: {
+      onError: () => {
+        toast({
+          title: "Error",
+          description: "Failed to fetch news articles. Please try again later.",
+          variant: "destructive",
+        });
+      },
     },
   });
 
