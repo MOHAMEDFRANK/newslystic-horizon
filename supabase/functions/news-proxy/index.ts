@@ -16,10 +16,10 @@ serve(async (req) => {
       throw new Error('NEWS_API_KEY not found')
     }
 
-    const url = new URL(req.url)
-    const endpoint = url.searchParams.get('endpoint')
-    const category = url.searchParams.get('category')
-    const query = url.searchParams.get('query')
+    // Parse the request body instead of URL params
+    const { endpoint, category, query } = await req.json()
+    
+    console.log('Received request:', { endpoint, category, query })
 
     let apiUrl = 'https://newsapi.org/v2'
     let params = new URLSearchParams()
@@ -33,15 +33,20 @@ serve(async (req) => {
       if (query) params.append('q', query)
       params.append('language', 'en')
     } else {
+      console.error('Invalid endpoint provided:', endpoint)
       throw new Error('Invalid endpoint')
     }
 
     params.append('apiKey', apiKey)
     
+    const finalUrl = `${apiUrl}?${params.toString()}`
     console.log(`Fetching from NewsAPI: ${apiUrl}`)
-    const response = await fetch(`${apiUrl}?${params.toString()}`)
+    
+    const response = await fetch(finalUrl)
     const data = await response.json()
 
+    console.log('NewsAPI response status:', response.status)
+    
     return new Response(
       JSON.stringify(data),
       {
