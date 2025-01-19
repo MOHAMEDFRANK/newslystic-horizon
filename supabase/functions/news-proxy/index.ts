@@ -13,8 +13,11 @@ serve(async (req) => {
   try {
     const apiKey = Deno.env.get('NEWS_API_KEY')
     if (!apiKey) {
+      console.error('NEWS_API_KEY not found in environment variables')
       throw new Error('NEWS_API_KEY not found')
     }
+
+    console.log('API Key found:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No')
 
     // Parse the request body instead of URL params
     const { endpoint, category, query } = await req.json()
@@ -40,13 +43,18 @@ serve(async (req) => {
     params.append('apiKey', apiKey)
     
     const finalUrl = `${apiUrl}?${params.toString()}`
-    console.log(`Fetching from NewsAPI: ${apiUrl}`)
+    console.log('Fetching from NewsAPI:', apiUrl)
     
     const response = await fetch(finalUrl)
     const data = await response.json()
 
     console.log('NewsAPI response status:', response.status)
     
+    if (!response.ok) {
+      console.error('NewsAPI error:', data)
+      throw new Error(data.message || 'Failed to fetch news')
+    }
+
     return new Response(
       JSON.stringify(data),
       {
