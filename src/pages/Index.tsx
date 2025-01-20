@@ -7,6 +7,7 @@ import NewsGrid from "@/components/NewsGrid";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory>();
@@ -36,6 +37,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8">Latest News</h1>
         
