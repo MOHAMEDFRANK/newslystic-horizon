@@ -30,9 +30,9 @@ const CategoryFilter = ({
           size="sm"
           onClick={() => onSelectCategory(category.value)}
           className={cn(
-            "whitespace-nowrap",
+            "whitespace-nowrap bg-[#ea384c] text-white hover:bg-[#ea384c]/90 border-[#ea384c]",
             selectedCategory === category.value &&
-              "bg-primary text-primary-foreground hover:bg-primary/90"
+              "bg-[#ea384c]/80 hover:bg-[#ea384c]/70"
           )}
         >
           {category.label}
