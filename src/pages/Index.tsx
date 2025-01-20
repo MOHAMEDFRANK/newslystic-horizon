@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import NewsGrid from "@/components/NewsGrid";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory>();
@@ -34,18 +35,21 @@ const Index = () => {
   });
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Latest News</h1>
-      
-      <div className="space-y-6 mb-8">
-        <SearchBar onSearch={setSearchQuery} />
-        <CategoryFilter
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8">Latest News</h1>
+        
+        <div className="space-y-6 mb-8">
+          <SearchBar onSearch={setSearchQuery} />
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </div>
 
-      <NewsGrid articles={articles || []} isLoading={isLoading} />
+        <NewsGrid articles={articles || []} isLoading={isLoading} />
+      </main>
+      <Footer />
     </div>
   );
 };

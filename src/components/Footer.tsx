@@ -1,0 +1,78 @@
+import { Link } from "react-router-dom";
+import { ExternalLink, Github, Twitter } from "lucide-react";
+
+const Footer = () => {
+  return (
+    <footer className="bg-[#1A1F2C] text-white mt-12 py-8">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Features Section */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Features</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/" className="hover:text-gray-300 flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  Latest News
+                </Link>
+              </li>
+              <li>
+                <Link to="/?category=technology" className="hover:text-gray-300 flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  Tech News
+                </Link>
+              </li>
+              <li>
+                <Link to="/?category=business" className="hover:text-gray-300 flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  Business Updates
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
+            <div className="flex space-x-4">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-300"
+              >
+                <Github className="w-6 h-6" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-300"
+              >
+                <Twitter className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <p className="text-gray-300">
+              Have questions? Reach out to us at:
+              <br />
+              <a href="mailto:contact@newslystic.com" className="hover:text-white">
+                contact@newslystic.com
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm text-gray-400">
+          <p>© {new Date().getFullYear()} Newslystic. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
