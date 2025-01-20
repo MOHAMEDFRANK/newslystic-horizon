@@ -45,7 +45,10 @@ const Navbar = () => {
           {isMobile ? (
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button 
+                  className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white"
+                  size="icon"
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
