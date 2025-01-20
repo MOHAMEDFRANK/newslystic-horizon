@@ -13,10 +13,9 @@ const Navbar = () => {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Technology", href: "/?category=technology" },
-    { label: "Business", href: "/?category=business" },
-    { label: "Sports", href: "/?category=sports" },
-    { label: "Entertainment", href: "/?category=entertainment" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
+    { label: "Report", href: "/report" },
   ];
 
   const NavLinks = () => (
