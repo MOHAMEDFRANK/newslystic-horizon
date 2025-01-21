@@ -39,7 +39,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">Latest News</h1>
+        <h1 className="text-4xl font-bold mb-8 text-[#ea384c]">Latest News</h1>
         
         <div className="space-y-6 mb-8">
           <SearchBar onSearch={setSearchQuery} />
