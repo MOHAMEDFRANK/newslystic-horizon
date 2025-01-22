@@ -1,12 +1,15 @@
 import { NewsArticle } from "@/types/news";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Calendar, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface NewsCardProps {
   article: NewsArticle;
 }
 
 const NewsCard = ({ article }: NewsCardProps) => {
+  const navigate = useNavigate();
+  
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
@@ -15,8 +18,17 @@ const NewsCard = ({ article }: NewsCardProps) => {
     });
   };
 
+  const handleClick = () => {
+    navigate(`/article/${encodeURIComponent(article.title)}`, {
+      state: { article }
+    });
+  };
+
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+    <Card 
+      className="overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col cursor-pointer" 
+      onClick={handleClick}
+    >
       <div className="aspect-video relative overflow-hidden">
         {article.urlToImage ? (
           <img
@@ -35,15 +47,8 @@ const NewsCard = ({ article }: NewsCardProps) => {
           <Calendar className="h-4 w-4" />
           {formatDate(article.publishedAt)}
         </div>
-        <h3 className="font-bold text-lg line-clamp-2 mb-2">
-          <a
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600 transition-colors"
-          >
-            {article.title}
-          </a>
+        <h3 className="font-bold text-lg line-clamp-2 mb-2 hover:text-[#ea384c] transition-colors">
+          {article.title}
         </h3>
         <p className="text-muted-foreground line-clamp-3">{article.description}</p>
       </CardHeader>
