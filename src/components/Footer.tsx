@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ExternalLink, Github, Twitter } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Footer = () => {
   return (
@@ -34,7 +35,7 @@ const Footer = () => {
           {/* Social Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
               <a
                 href="https://github.com"
                 target="_blank"
@@ -51,6 +52,7 @@ const Footer = () => {
               >
                 <Twitter className="w-6 h-6" />
               </a>
+              <ThemeToggle />
             </div>
           </div>
 

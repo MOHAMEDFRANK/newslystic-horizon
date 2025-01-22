@@ -1,12 +1,9 @@
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -19,25 +16,28 @@ const Navbar = () => {
   ];
 
   const NavLinks = () => (
-    <ul className="flex flex-col md:flex-row gap-4">
-      {navItems.map((item) => (
-        <li key={item.label}>
-          <Link
-            to={item.href}
-            className="text-gray-700 hover:text-gray-900 transition-colors"
-          >
-            {item.label}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="flex items-center gap-4">
+      <ul className="flex flex-col md:flex-row gap-4">
+        {navItems.map((item) => (
+          <li key={item.label}>
+            <Link
+              to={item.href}
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <ThemeToggle />
+    </div>
   );
 
   return (
-    <nav className="border-b">
+    <nav className="border-b dark:border-gray-800">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-gray-900">
+          <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
             Newslystic
           </Link>
 
