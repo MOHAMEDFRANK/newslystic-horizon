@@ -20,6 +20,8 @@ serve(async (req) => {
       throw new Error('API key not configured')
     }
 
+    console.log('Received request:', { endpoint, category, query, page, pageSize })
+
     const baseUrl = 'https://newsapi.org/v2'
     let url = `${baseUrl}/${endpoint}`
     const params = new URLSearchParams({
@@ -34,19 +36,25 @@ serve(async (req) => {
         params.append('category', category)
       }
     } else if (endpoint === 'everything') {
+      if (!query) {
+        throw new Error('Query parameter is required for /everything endpoint')
+      }
       params.append('q', query)
       params.append('sortBy', 'publishedAt')
     }
 
-    console.log(`Fetching from ${url}?${params.toString()}`)
+    const fullUrl = `${url}?${params.toString()}`
+    console.log('Fetching from News API:', fullUrl.replace(apiKey, '[REDACTED]'))
     
-    const response = await fetch(`${url}?${params.toString()}`)
+    const response = await fetch(fullUrl)
     const data = await response.json()
 
     if (!response.ok) {
       console.error('News API error:', data)
       throw new Error(data.message || 'Failed to fetch news')
     }
+
+    console.log('Successfully fetched articles:', data.articles?.length || 0)
 
     return new Response(
       JSON.stringify(data),
@@ -57,7 +65,7 @@ serve(async (req) => {
         } 
       }
     )
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in news-proxy:', error)
     return new Response(
       JSON.stringify({ 
