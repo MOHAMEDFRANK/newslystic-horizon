@@ -37,8 +37,11 @@ const Navbar = () => {
     <nav className="border-b dark:border-gray-800">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-            Newslystic
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/favicon.ico" alt="Pulse Logo" className="w-8 h-8" />
+            <span className="text-2xl font-bold text-[#ea384c]">
+              Pulse
+            </span>
           </Link>
 
           {isMobile ? (
