@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const NavLinks = () => (
     <div className="flex items-center gap-4">
-      <ul className="flex flex-col md:flex-row gap-4">
+      <ul className="flex flex-col md:flex-row gap-4 items-center">
         {navItems.map((item) => (
           <li key={item.label}>
             <Link
@@ -61,7 +61,9 @@ const Navbar = () => {
               </SheetContent>
             </Sheet>
           ) : (
-            <NavLinks />
+            <div className="flex-1 flex justify-center">
+              <NavLinks />
+            </div>
           )}
         </div>
       </div>
