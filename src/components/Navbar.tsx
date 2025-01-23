@@ -1,9 +1,16 @@
-import { Menu } from "lucide-react";
+import { Menu, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThemeToggle } from "./ThemeToggle";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -13,6 +20,14 @@ const Navbar = () => {
     { label: "About Us", href: "/about" },
     { label: "Contact Us", href: "/contact" },
     { label: "Report", href: "/report" },
+  ];
+
+  const languages = [
+    { label: "English", code: "en" },
+    { label: "Spanish", code: "es" },
+    { label: "French", code: "fr" },
+    { label: "German", code: "de" },
+    { label: "Chinese", code: "zh" },
   ];
 
   const NavLinks = () => (
@@ -28,6 +43,32 @@ const Navbar = () => {
             </Link>
           </li>
         ))}
+        <li>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="flex items-center gap-2">
+                  <Globe className="h-4 w-4" />
+                  Language
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="p-2 w-48">
+                    {languages.map((lang) => (
+                      <li key={lang.code}>
+                        <button
+                          onClick={() => console.log(`Switching to ${lang.label}`)}
+                          className="w-full text-left px-2 py-2 hover:bg-accent rounded-md transition-colors"
+                        >
+                          {lang.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </li>
       </ul>
       <ThemeToggle />
     </div>
