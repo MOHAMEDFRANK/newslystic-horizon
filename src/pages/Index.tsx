@@ -36,7 +36,7 @@ const Index = () => {
         });
       },
     },
-    placeholderData: 'keepPrevious'
+    placeholderData: (previousData) => previousData
   });
 
   const handleLoadMore = () => {
