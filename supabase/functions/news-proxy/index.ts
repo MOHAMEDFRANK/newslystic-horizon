@@ -1,75 +1,59 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
-const corsHeaders = {
+const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+    return new Response('ok', { headers: CORS_HEADERS })
   }
 
   try {
+    const { endpoint, category, query, page = 1, pageSize = 10 } = await req.json()
     const apiKey = Deno.env.get('NEWS_API_KEY')
-    if (!apiKey) {
-      console.error('NEWS_API_KEY not found in environment variables')
-      throw new Error('NEWS_API_KEY not found')
-    }
+    const baseUrl = 'https://newsapi.org/v2'
 
-    console.log('API Key found:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No')
+    let url = `${baseUrl}/${endpoint}`
+    const params = new URLSearchParams({
+      apiKey,
+      page: page.toString(),
+      pageSize: pageSize.toString(),
+    })
 
-    // Parse the request body instead of URL params
-    const { endpoint, category, query } = await req.json()
-    
-    console.log('Received request:', { endpoint, category, query })
-
-    let apiUrl = 'https://newsapi.org/v2'
-    let params = new URLSearchParams()
-    
     if (endpoint === 'top-headlines') {
-      apiUrl += '/top-headlines'
       params.append('country', 'us')
-      if (category) params.append('category', category)
+      if (category) {
+        params.append('category', category)
+      }
     } else if (endpoint === 'everything') {
-      apiUrl += '/everything'
-      if (query) params.append('q', query)
-      params.append('language', 'en')
-    } else {
-      console.error('Invalid endpoint provided:', endpoint)
-      throw new Error('Invalid endpoint')
+      params.append('q', query)
+      params.append('sortBy', 'publishedAt')
     }
 
-    params.append('apiKey', apiKey)
-    
-    const finalUrl = `${apiUrl}?${params.toString()}`
-    console.log('Fetching from NewsAPI:', apiUrl)
-    
-    const response = await fetch(finalUrl)
+    const response = await fetch(`${url}?${params.toString()}`)
     const data = await response.json()
-
-    console.log('NewsAPI response status:', response.status)
-    
-    if (!response.ok) {
-      console.error('NewsAPI error:', data)
-      throw new Error(data.message || 'Failed to fetch news')
-    }
 
     return new Response(
       JSON.stringify(data),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: response.status,
-      },
+      { 
+        headers: { 
+          ...CORS_HEADERS,
+          'Content-Type': 'application/json' 
+        } 
+      }
     )
   } catch (error) {
-    console.error('Error in news-proxy:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 500,
-      },
+      { 
+        status: 400,
+        headers: { 
+          ...CORS_HEADERS,
+          'Content-Type': 'application/json' 
+        }
+      }
     )
   }
 })

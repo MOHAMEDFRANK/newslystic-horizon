@@ -8,22 +8,25 @@ import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory>();
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [page, setPage] = useState(1);
   const { toast } = useToast();
 
   const {
     data: articles,
     isLoading,
     error,
+    isFetching,
   } = useQuery({
-    queryKey: ["news", selectedCategory, searchQuery],
+    queryKey: ["news", selectedCategory, searchQuery, page],
     queryFn: () =>
       searchQuery
-        ? searchNews(searchQuery)
-        : fetchTopHeadlines(selectedCategory),
+        ? searchNews(searchQuery, page)
+        : fetchTopHeadlines(selectedCategory, page),
     meta: {
       onError: () => {
         toast({
@@ -33,7 +36,14 @@ const Index = () => {
         });
       },
     },
+    keepPreviousData: true,
   });
+
+  const handleLoadMore = () => {
+    setPage(prev => prev + 1);
+  };
+
+  const displayedArticles = articles || [];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -42,14 +52,32 @@ const Index = () => {
         <h1 className="text-4xl font-bold mb-8 text-[#ea384c]">Latest News</h1>
         
         <div className="space-y-6 mb-8">
-          <SearchBar onSearch={setSearchQuery} />
+          <SearchBar onSearch={(query) => {
+            setSearchQuery(query);
+            setPage(1);
+          }} />
           <CategoryFilter
             selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
+            onSelectCategory={(category) => {
+              setSelectedCategory(category);
+              setPage(1);
+            }}
           />
         </div>
 
-        <NewsGrid articles={articles || []} isLoading={isLoading} />
+        <NewsGrid articles={displayedArticles} isLoading={isLoading} />
+        
+        {displayedArticles.length > 0 && (
+          <div className="mt-8 flex justify-center">
+            <Button 
+              onClick={handleLoadMore}
+              disabled={isFetching}
+              className="bg-[#ea384c] hover:bg-[#ea384c]/90"
+            >
+              {isFetching ? "Loading..." : "Load More"}
+            </Button>
+          </div>
+        )}
       </main>
       <Footer />
     </div>

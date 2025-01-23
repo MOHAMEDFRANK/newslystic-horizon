@@ -2,11 +2,16 @@ import axios from "axios";
 import { NewsArticle, NewsCategory } from "@/types/news";
 import { supabase } from "@/integrations/supabase/client";
 
-export const fetchTopHeadlines = async (category?: NewsCategory) => {
-  console.log("Fetching top headlines", { category });
+export const fetchTopHeadlines = async (category?: NewsCategory, page: number = 1) => {
+  console.log("Fetching top headlines", { category, page });
   try {
     const { data, error } = await supabase.functions.invoke('news-proxy', {
-      body: { endpoint: 'top-headlines', category }
+      body: { 
+        endpoint: 'top-headlines', 
+        category,
+        page,
+        pageSize: 10
+      }
     });
 
     if (error) throw error;
@@ -18,11 +23,16 @@ export const fetchTopHeadlines = async (category?: NewsCategory) => {
   }
 };
 
-export const searchNews = async (query: string) => {
-  console.log("Searching news", { query });
+export const searchNews = async (query: string, page: number = 1) => {
+  console.log("Searching news", { query, page });
   try {
     const { data, error } = await supabase.functions.invoke('news-proxy', {
-      body: { endpoint: 'everything', query }
+      body: { 
+        endpoint: 'everything', 
+        query,
+        page,
+        pageSize: 10
+      }
     });
 
     if (error) throw error;
