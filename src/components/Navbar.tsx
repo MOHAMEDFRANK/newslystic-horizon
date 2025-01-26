@@ -33,7 +33,7 @@ const Navbar = () => {
   ];
 
   const NavLinks = () => (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-col gap-4">
       <ul className="flex flex-col md:flex-row gap-4 items-center">
         {navItems.map((item) => (
           <li key={item.label}>
@@ -74,7 +74,7 @@ const Navbar = () => {
           </NavigationMenu>
         </li>
       </ul>
-      <ThemeToggle />
+      {isMobile && <ThemeToggle />}
     </div>
   );
 
@@ -106,8 +106,9 @@ const Navbar = () => {
               </SheetContent>
             </Sheet>
           ) : (
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1 flex justify-center items-center gap-4">
               <NavLinks />
+              <ThemeToggle />
             </div>
           )}
         </div>
