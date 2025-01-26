@@ -69,8 +69,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm text-gray-400">
-          <p>© {new Date().getFullYear()} Newslystic. All rights reserved.</p>
+        <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm">
+          <p className="text-white">© {new Date().getFullYear()} Newslystic. All rights reserved.</p>
         </div>
       </div>
     </footer>
