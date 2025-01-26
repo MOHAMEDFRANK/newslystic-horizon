@@ -2,7 +2,7 @@
 
 A modern, multilingual news aggregation platform built with React and TypeScript, featuring real-time news updates, category filtering, and comprehensive search capabilities.
 
-![Pulse Logo](/favicon.ico)
+![Pulse Logo](public/og-image.png)
 
 ## Overview
 
