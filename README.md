@@ -118,28 +118,22 @@ The application integrates with NewsAPI.org through Supabase Edge Functions to f
 
 ## Getting Started
 
-1. **Clone the Repository**
-```bash
-git clone <repository-url>
-cd pulse-new-horizon
-```
-
-2. **Install Dependencies**
+1. **Install Dependencies**
 ```bash
 npm install
 ```
 
-3. **Set Up Supabase**
+2. **Set Up Supabase**
 - Create a Supabase project
 - Configure Edge Functions
 - Set required environment variables
 
-4. **Development**
+3. **Development**
 ```bash
 npm run dev
 ```
 
-5. **Build**
+4. **Build**
 ```bash
 npm run build
 ```
@@ -161,7 +155,7 @@ The application can be deployed through:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GPL License - see the LICENSE file for details.
 
 ## Credits
 
