@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { NewsCategory } from "@/types/news";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface CategoryFilterProps {
   selectedCategory: NewsCategory | undefined;
@@ -8,19 +9,21 @@ interface CategoryFilterProps {
 }
 
 const categories: { label: string; value: NewsCategory | undefined }[] = [
-  { label: "All", value: undefined },
-  { label: "Business", value: "business" },
-  { label: "Technology", value: "technology" },
-  { label: "Entertainment", value: "entertainment" },
-  { label: "Health", value: "health" },
-  { label: "Science", value: "science" },
-  { label: "Sports", value: "sports" },
+  { label: "categories.all", value: undefined },
+  { label: "categories.business", value: "business" },
+  { label: "categories.technology", value: "technology" },
+  { label: "categories.entertainment", value: "entertainment" },
+  { label: "categories.health", value: "health" },
+  { label: "categories.science", value: "science" },
+  { label: "categories.sports", value: "sports" },
 ];
 
 const CategoryFilter = ({
   selectedCategory,
   onSelectCategory,
 }: CategoryFilterProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2">
       {categories.map((category) => (
@@ -35,7 +38,7 @@ const CategoryFilter = ({
               "bg-[#ea384c]/80 hover:bg-[#ea384c]/70"
           )}
         >
-          {category.label}
+          {t(category.label)}
         </Button>
       ))}
     </div>

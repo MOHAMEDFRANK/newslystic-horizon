@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "report": "Report",
+    "language": "Language"
+  },
+  "categories": {
+    "all": "All",
+    "business": "Business",
+    "technology": "Technology",
+    "entertainment": "Entertainment",
+    "health": "Health",
+    "science": "Science",
+    "sports": "Sports"
+  },
+  "news": {
+    "latestNews": "Latest News",
+    "noArticles": "No articles found",
+    "loadMore": "Load More",
+    "loading": "Loading...",
+    "readMore": "Read full article at source",
+    "backToNews": "Back to News"
+  },
+  "footer": {
+    "copyright": "© {{year}} Newslystic. All rights reserved.",
+    "about": {
+      "title": "About Us",
+      "description": "We deliver the latest news from around the world."
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "phone": "Phone"
+    }
+  }
+}

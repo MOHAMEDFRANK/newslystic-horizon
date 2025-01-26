@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "report": "报告",
+    "language": "语言"
+  },
+  "categories": {
+    "all": "全部",
+    "business": "商业",
+    "technology": "科技",
+    "entertainment": "娱乐",
+    "health": "健康",
+    "science": "科学",
+    "sports": "体育"
+  },
+  "news": {
+    "latestNews": "最新新闻",
+    "noArticles": "未找到文章",
+    "loadMore": "加载更多",
+    "loading": "加载中...",
+    "readMore": "在源站阅读完整文章",
+    "backToNews": "返回新闻"
+  },
+  "footer": {
+    "copyright": "© {{year}} Newslystic. 版权所有。",
+    "about": {
+      "title": "关于我们",
+      "description": "我们提供来自世界各地的最新新闻。"
+    },
+    "contact": {
+      "title": "联系方式",
+      "email": "邮箱",
+      "phone": "电话"
+    }
+  }
+}

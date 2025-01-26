@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThemeToggle } from "./ThemeToggle";
+import { useTranslation } from "react-i18next";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,20 +15,21 @@ import {
 
 const Navbar = () => {
   const isMobile = useIsMobile();
+  const { t, i18n } = useTranslation();
 
   const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Contact Us", href: "/contact" },
-    { label: "Report", href: "/report" },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.contact"), href: "/contact" },
+    { label: t("nav.report"), href: "/report" },
   ];
 
   const languages = [
     { label: "English", code: "en" },
-    { label: "Spanish", code: "es" },
-    { label: "French", code: "fr" },
-    { label: "German", code: "de" },
-    { label: "Chinese", code: "zh" },
+    { label: "Español", code: "es" },
+    { label: "Français", code: "fr" },
+    { label: "Deutsch", code: "de" },
+    { label: "中文", code: "zh" },
   ];
 
   const NavLinks = () => (
@@ -49,15 +51,17 @@ const Navbar = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
-                  Language
+                  {t("nav.language")}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="p-2 w-48">
                     {languages.map((lang) => (
                       <li key={lang.code}>
                         <button
-                          onClick={() => console.log(`Switching to ${lang.label}`)}
-                          className="w-full text-left px-2 py-2 hover:bg-accent rounded-md transition-colors"
+                          onClick={() => i18n.changeLanguage(lang.code)}
+                          className={`w-full text-left px-2 py-2 hover:bg-accent rounded-md transition-colors ${
+                            i18n.language === lang.code ? "bg-accent" : ""
+                          }`}
                         >
                           {lang.label}
                         </button>

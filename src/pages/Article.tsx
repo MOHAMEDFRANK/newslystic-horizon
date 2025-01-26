@@ -1,16 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Article = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const article = location.state?.article;
+  const { t } = useTranslation();
 
   if (!article) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1>Article not found</h1>
+        <h1>{t("news.noArticles")}</h1>
       </div>
     );
   }
@@ -31,7 +33,7 @@ const Article = () => {
         onClick={() => navigate(-1)}
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
-        Back to News
+        {t("news.backToNews")}
       </Button>
 
       <article className="max-w-4xl mx-auto">
@@ -65,7 +67,7 @@ const Article = () => {
               rel="noopener noreferrer"
               className="text-[#ea384c] hover:underline"
             >
-              Read full article at source
+              {t("news.readMore")}
             </a>
           </div>
         </div>

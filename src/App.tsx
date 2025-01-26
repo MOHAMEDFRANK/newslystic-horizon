@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "@/pages/Index";
 import Article from "@/pages/Article";
+import "@/i18n/config";
 
 const queryClient = new QueryClient();
 

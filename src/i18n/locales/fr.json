@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "contact": "Contact",
+    "report": "Signaler",
+    "language": "Langue"
+  },
+  "categories": {
+    "all": "Tout",
+    "business": "Affaires",
+    "technology": "Technologie",
+    "entertainment": "Divertissement",
+    "health": "Santé",
+    "science": "Science",
+    "sports": "Sports"
+  },
+  "news": {
+    "latestNews": "Dernières Nouvelles",
+    "noArticles": "Aucun article trouvé",
+    "loadMore": "Charger Plus",
+    "loading": "Chargement...",
+    "readMore": "Lire l'article complet à la source",
+    "backToNews": "Retour aux Nouvelles"
+  },
+  "footer": {
+    "copyright": "© {{year}} Newslystic. Tous droits réservés.",
+    "about": {
+      "title": "À Propos",
+      "description": "Nous livrons les dernières nouvelles du monde entier."
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "phone": "Téléphone"
+    }
+  }
+}

@@ -9,12 +9,14 @@ import CategoryFilter from "@/components/CategoryFilter";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory>();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState(1);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const {
     data: articles,
@@ -49,7 +51,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-[#ea384c]">Latest News</h1>
+        <h1 className="text-4xl font-bold mb-8 text-[#ea384c]">{t("news.latestNews")}</h1>
         
         <div className="space-y-6 mb-8">
           <SearchBar onSearch={(query) => {
@@ -74,7 +76,7 @@ const Index = () => {
               disabled={isFetching}
               className="bg-[#ea384c] hover:bg-[#ea384c]/90"
             >
-              {isFetching ? "Loading..." : "Load More"}
+              {isFetching ? t("news.loading") : t("news.loadMore")}
             </Button>
           </div>
         )}
