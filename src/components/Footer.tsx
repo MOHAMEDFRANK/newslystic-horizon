@@ -1,8 +1,28 @@
 import { Link } from "react-router-dom";
-import { ExternalLink, Github, Twitter } from "lucide-react";
+import { ExternalLink, Github, Twitter, Binary, Cpu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [binaryVersion, setBinaryVersion] = useState("1.0.0");
+  const [showBinary, setShowBinary] = useState(false);
+
+  // Convert version to binary when hovered
+  const convertToBinary = (version: string) => {
+    return version
+      .split(".")
+      .map(num => parseInt(num).toString(2).padStart(8, '0'))
+      .join(".");
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowBinary(prev => !prev);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="bg-[#ea384c] text-white mt-12 py-8">
       <div className="container mx-auto px-4">
@@ -69,8 +89,19 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-gray-700 text-center text-sm">
-          <p className="text-white">© {new Date().getFullYear()} Newslystic. All rights reserved.</p>
+        <div className="mt-8 pt-4 border-t border-gray-700">
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <div className="flex items-center gap-2 text-sm font-mono">
+              <Cpu className="w-4 h-4 animate-pulse" />
+              <span className="transition-all duration-500">
+                {showBinary ? convertToBinary(binaryVersion) : `v${binaryVersion}`}
+              </span>
+              <Binary className="w-4 h-4" />
+            </div>
+            <p className="text-white text-sm">
+              © {new Date().getFullYear()} Pulse New Horizon by Avodstudio. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
