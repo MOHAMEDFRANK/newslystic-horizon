@@ -75,7 +75,7 @@ Implements category-based filtering with:
 ### SearchBar
 Real-time search functionality with:
 - Debounced search
-- Query highlighting
+- Query highlighting 
 - Error handling
 
 ## Supabase Integration
